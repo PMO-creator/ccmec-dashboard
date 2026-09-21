@@ -1,0 +1,25 @@
+# Credenciais e segredos - NUNCA versionar
+.env
+.env.*
+!.env.example
+dashboards-projetos-*.json
+*service-account*.json
+*credentials*.json
+credentials/
+secrets/
+*.pem
+*.key
+
+# Dependências
+node_modules/
+venv/
+__pycache__/
+
+# Build / cache
+dist/
+build/
+.cache/
+
+# Sistema
+.DS_Store
+Thumbs.db

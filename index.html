@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCMEC - Cronograma 2026</title>
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1>CCMEC — Cronograma 2026</h1>
+      <div class="meta">Atualizado em <span id="generated-at">—</span></div>
+    </header>
+
+    <p id="app-state">Carregando dados…</p>
+
+    <section class="stat-row">
+      <div class="stat-tile">
+        <div class="label">Total de tarefas</div>
+        <div class="value" id="stat-total">—</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">Com datas definidas</div>
+        <div class="value" id="stat-com-datas">—</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">Aguardando datas</div>
+        <div class="value" id="stat-sem-datas">—</div>
+      </div>
+      <div class="stat-tile">
+        <div class="label">Eixos</div>
+        <div class="value" id="stat-eixos">—</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Cronograma (tarefas com datas definidas)</h2>
+        <span class="sub">Barras coloridas por Eixo</span>
+      </div>
+      <div class="controls">
+        <input type="search" id="search-input" placeholder="Buscar por tarefa, grupo ou responsável…" />
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="gantt-scroll">
+        <div class="gantt">
+          <div class="gantt-months" id="gantt-months"></div>
+          <div id="gantt-body"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Tarefas aguardando definição de datas</h2>
+        <span class="sub"><span id="table-count">0</span> tarefa(s)</span>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Eixo</th>
+              <th>Grupo</th>
+              <th>Tarefa</th>
+              <th>Responsável</th>
+              <th>Status</th>
+              <th>Prioridade</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="footer-note">Dados lidos da planilha "CCMEC - CRONOGRAMA 2026" (aba "master data"), atualizados periodicamente via GitHub Actions.</p>
+  </div>
+
+  <div id="tooltip"></div>
+
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
