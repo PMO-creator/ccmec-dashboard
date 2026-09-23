@@ -73,8 +73,10 @@
 
       <section class="panel">
         <div class="panel-header panel-header--brand">
-          <h2 class="panel-title--xl">Cronograma Gantt por Eixo</h2>
-          <span class="sub">Barras coloridas por Status</span>
+          <div>
+            <h2 class="panel-title--xl">Cronograma Gantt por Eixo</h2>
+            <span class="sub">Barras coloridas por Status</span>
+          </div>
           <div class="gantt-tools">
             <div class="view-toggle">
               <button type="button" class="view-toggle-btn is-active" id="view-monthly" data-view-mode="monthly">Mensal</button>
@@ -130,28 +132,50 @@
     </section>
 
     <section class="tab-panel" data-tab-panel="fornecedores" hidden>
-      <section class="panel">
-        <div class="panel-header panel-header--brand">
-          <h2>Fornecedores</h2>
-          <span class="sub"><span id="fornecedores-count">0</span> fornecedor(es)</span>
+      <section class="panel vendor-panel">
+        <div class="panel-header panel-header--brand vendor-header">
+          <div>
+            <h2 class="panel-title--xl">Fornecedores</h2>
+            <span class="sub" id="fornecedores-meta"></span>
+          </div>
+          <div class="vendor-header-actions">
+            <button type="button" class="view-collapse-btn" id="fornecedores-export-btn">Exportar PDF</button>
+            <button type="button" class="view-collapse-btn" id="fornecedores-collapse-all-btn">▲ Recolher Tudo</button>
+          </div>
         </div>
         <div class="controls">
-          <input type="search" id="fornecedores-search" placeholder="Buscar por fornecedor ou tarefa…" />
+          <input type="search" id="fornecedores-search" placeholder="Buscar por fornecedor, grupo, marco, tarefa, responsável…" />
+          <button type="button" class="pill-toggle-btn" id="fornecedores-expand-all-btn">Todos os itens</button>
         </div>
-        <div class="group-list" id="fornecedores-list"></div>
+        <div class="controls controls--stage">
+          <div class="legend legend--stage" id="fornecedores-stage-legend"></div>
+        </div>
+        <div class="vendor-summary-row" id="fornecedores-summary"></div>
+        <div class="vendor-grid" id="fornecedores-list"></div>
       </section>
     </section>
 
     <section class="tab-panel" data-tab-panel="responsaveis" hidden>
-      <section class="panel">
-        <div class="panel-header panel-header--brand">
-          <h2>Responsáveis</h2>
-          <span class="sub"><span id="responsaveis-count">0</span> responsável(is)</span>
+      <section class="panel vendor-panel">
+        <div class="panel-header panel-header--brand vendor-header">
+          <div>
+            <h2 class="panel-title--xl">Responsáveis</h2>
+            <span class="sub" id="responsaveis-meta"></span>
+          </div>
+          <div class="vendor-header-actions">
+            <button type="button" class="view-collapse-btn" id="responsaveis-export-btn">Exportar PDF</button>
+            <button type="button" class="view-collapse-btn" id="responsaveis-collapse-all-btn">▲ Recolher Tudo</button>
+          </div>
         </div>
         <div class="controls">
-          <input type="search" id="responsaveis-search" placeholder="Buscar por responsável ou tarefa…" />
+          <input type="search" id="responsaveis-search" placeholder="Buscar por responsável, grupo, marco, tarefa, fornecedor…" />
+          <button type="button" class="pill-toggle-btn" id="responsaveis-expand-all-btn">Todos os itens</button>
         </div>
-        <div class="group-list" id="responsaveis-list"></div>
+        <div class="controls controls--stage">
+          <div class="legend legend--stage" id="responsaveis-stage-legend"></div>
+        </div>
+        <div class="vendor-summary-row" id="responsaveis-summary"></div>
+        <div class="vendor-grid" id="responsaveis-list"></div>
       </section>
     </section>
 

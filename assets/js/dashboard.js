@@ -123,14 +123,6 @@
     }
   }
 
-  const STATUS_BUCKETS = [
-    { key: "good", label: "Concluído", color: "--status-good" },
-    { key: "serious", label: "Em andamento", color: "--status-serious" },
-    { key: "warning", label: "Risco de atraso", color: "--status-warning" },
-    { key: "critical", label: "Atrasado", color: "--status-critical" },
-    { key: "neutral", label: "A definir / outros", color: "--status-neutral" },
-  ];
-
   // Resumo no topo da aba Status Report — % de tarefas por estágio.
   const STATUS_OVERVIEW_STAGES = [
     { key: "feito", label: "Concluídas", color: "--stage-feito" },
@@ -208,15 +200,6 @@
   }
   function cssVar(name) {
     return getComputedStyle(root).getPropertyValue(name).trim();
-  }
-
-  function statusClass(status) {
-    const s = (status || "").toLowerCase();
-    if (s.includes("conclu")) return "good";
-    if (s.includes("atras") || s.includes("critic")) return "critical";
-    if (s.includes("risco") || s.includes("alerta") || s.includes("atenção")) return "warning";
-    if (s.includes("andamento") || s.includes("execu")) return "serious";
-    return "neutral";
   }
 
   function taskLabel(task) {
@@ -405,21 +388,21 @@
 
     applyStatusFilters();
 
-    setupGroupTab({
+    setupVendorTab({
       field: "fornecedor",
       tasks: allTasks,
-      searchId: "fornecedores-search",
-      listId: "fornecedores-list",
-      countId: "fornecedores-count",
-      emptyLabel: "fornecedor",
+      prefix: "fornecedores",
+      singular: "fornecedor",
+      plural: "fornecedores",
+      title: "Fornecedores",
     });
-    setupGroupTab({
+    setupVendorTab({
       field: "responsavel",
       tasks: allTasks,
-      searchId: "responsaveis-search",
-      listId: "responsaveis-list",
-      countId: "responsaveis-count",
-      emptyLabel: "responsável",
+      prefix: "responsaveis",
+      singular: "responsável",
+      plural: "responsáveis",
+      title: "Responsáveis",
     });
   }
 
@@ -701,87 +684,316 @@
     );
     return [...grouped.entries()]
       .map(([name, groupTasks]) => ({ name, tasks: groupTasks }))
-      .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
+      .sort((a, b) => {
+        const atrasadasA = a.tasks.filter((t) => stageKeyFor(t.status) === "atrasado").length;
+        const atrasadasB = b.tasks.filter((t) => stageKeyFor(t.status) === "atrasado").length;
+        if (atrasadasB !== atrasadasA) return atrasadasB - atrasadasA;
+        if (b.tasks.length !== a.tasks.length) return b.tasks.length - a.tasks.length;
+        return a.name.localeCompare(b.name, "pt-BR");
+      });
   }
 
-  function setupGroupTab({ field, tasks, searchId, listId, countId, emptyLabel }) {
-    const searchInput = document.getElementById(searchId);
-    const listEl = document.getElementById(listId);
-    const countEl = document.getElementById(countId);
+  function fmtBreadcrumb(task) {
+    return [task.eixo, task.grupo, task.marco]
+      .map((v) => (v || "").trim())
+      .filter(Boolean)
+      .join(" · ");
+  }
+
+  const VENDOR_PREVIEW_LIMIT = 4;
+
+  function buildExportModal({ prefix, title, plural, allGroups, onGenerate }) {
+    const overlay = document.createElement("div");
+    overlay.className = "export-modal-overlay";
+    overlay.id = `${prefix}-export-modal`;
+    overlay.hidden = true;
+    overlay.innerHTML = `
+      <div class="export-modal">
+        <div class="export-modal-header">
+          <h3>Exportar PDF — ${escapeHtml(title)}</h3>
+          <button type="button" class="export-modal-close" aria-label="Fechar">×</button>
+        </div>
+        <div class="export-modal-body">
+          <div class="export-modal-sub">Selecione os ${escapeHtml(plural)} (<span class="export-modal-selected-count">0</span> selecionados):</div>
+          <div class="export-modal-actions">
+            <button type="button" class="pill-toggle-btn export-select-all">Selecionar todos</button>
+            <button type="button" class="pill-toggle-btn export-select-none">Limpar</button>
+          </div>
+          <div class="export-modal-grid"></div>
+        </div>
+        <div class="export-modal-footer">
+          <button type="button" class="export-generate-btn" disabled>Gerar PDF ↓</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const grid = overlay.querySelector(".export-modal-grid");
+    const countEl = overlay.querySelector(".export-modal-selected-count");
+    const generateBtn = overlay.querySelector(".export-generate-btn");
+
+    for (const group of allGroups) {
+      const atrasadasN = group.tasks.filter((t) => stageKeyFor(t.status) === "atrasado").length;
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "export-modal-item";
+      item.dataset.name = group.name;
+      item.innerHTML = `${escapeHtml(group.name)} <span class="export-modal-item-count">(${group.tasks.length}${atrasadasN ? ` · ${atrasadasN} atrasada${atrasadasN > 1 ? "s" : ""}` : ""})</span>`;
+      grid.appendChild(item);
+    }
+
+    function updateCount() {
+      const n = grid.querySelectorAll(".export-modal-item.is-selected").length;
+      countEl.textContent = n;
+      generateBtn.disabled = n === 0;
+    }
+
+    grid.addEventListener("click", (e) => {
+      const item = e.target.closest(".export-modal-item");
+      if (!item) return;
+      item.classList.toggle("is-selected");
+      updateCount();
+    });
+
+    overlay.querySelector(".export-select-all").addEventListener("click", () => {
+      grid.querySelectorAll(".export-modal-item").forEach((item) => item.classList.add("is-selected"));
+      updateCount();
+    });
+    overlay.querySelector(".export-select-none").addEventListener("click", () => {
+      grid.querySelectorAll(".export-modal-item").forEach((item) => item.classList.remove("is-selected"));
+      updateCount();
+    });
+
+    function close() {
+      overlay.hidden = true;
+    }
+
+    overlay.querySelector(".export-modal-close").addEventListener("click", close);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) close();
+    });
+    generateBtn.addEventListener("click", () => {
+      const selected = [...grid.querySelectorAll(".export-modal-item.is-selected")].map((el) => el.dataset.name);
+      if (selected.length === 0) return;
+      close();
+      onGenerate(new Set(selected));
+    });
+
+    return {
+      open() {
+        overlay.hidden = false;
+      },
+    };
+  }
+
+  function setupVendorTab({ field, tasks, prefix, singular, plural, title }) {
+    const searchInput = document.getElementById(`${prefix}-search`);
+    const listEl = document.getElementById(`${prefix}-list`);
+    const metaEl = document.getElementById(`${prefix}-meta`);
+    const summaryEl = document.getElementById(`${prefix}-summary`);
+    const legendEl = document.getElementById(`${prefix}-stage-legend`);
+    const expandAllBtn = document.getElementById(`${prefix}-expand-all-btn`);
+    const collapseAllBtn = document.getElementById(`${prefix}-collapse-all-btn`);
+    const exportBtn = document.getElementById(`${prefix}-export-btn`);
     const allGroups = buildGroups(tasks, field);
 
-    function renderGroups(term) {
-      const q = term.trim().toLowerCase();
-      const groups = q
+    for (const stage of STAGE_LEGEND) {
+      const item = document.createElement("span");
+      item.className = "legend-item legend-item--static";
+      item.innerHTML = `<span class="legend-dot" style="background:var(${stage.color})"></span>${escapeHtml(stage.label)}`;
+      legendEl.appendChild(item);
+    }
+
+    const collapsedCards = new Set();
+    const expandedCards = new Set();
+    let showAllItems = false;
+
+    function renderSummary() {
+      const withField = tasks.filter((t) => (t[field] || "").trim());
+      const withoutCount = tasks.length - withField.length;
+      const atrasadas = tasks.filter((t) => stageKeyFor(t.status) === "atrasado");
+      const atrasadasPct = tasks.length ? Math.round((atrasadas.length / tasks.length) * 100) : 0;
+
+      let criticalName = "—";
+      let criticalCount = -1;
+      let volumeName = "—";
+      let volumeCount = -1;
+      for (const group of allGroups) {
+        const atrasadasN = group.tasks.filter((t) => stageKeyFor(t.status) === "atrasado").length;
+        if (atrasadasN > criticalCount) { criticalCount = atrasadasN; criticalName = group.name; }
+        if (group.tasks.length > volumeCount) { volumeCount = group.tasks.length; volumeName = group.name; }
+      }
+
+      summaryEl.innerHTML = `
+        <div class="vendor-stat-card">
+          <div class="vendor-stat-label">${escapeHtml(plural)} ativos</div>
+          <div class="vendor-stat-value">${allGroups.length}</div>
+          <div class="vendor-stat-sub">${withoutCount ? `+${withoutCount} sem ${escapeHtml(singular)}` : "todas as tarefas atribuídas"}</div>
+        </div>
+        <div class="vendor-stat-card">
+          <div class="vendor-stat-label">Tarefas atrasadas</div>
+          <div class="vendor-stat-value vendor-stat-value--danger">${atrasadas.length}</div>
+          <div class="vendor-stat-sub">${atrasadasPct}% do total de ${tasks.length} tarefas</div>
+        </div>
+        <div class="vendor-stat-card">
+          <div class="vendor-stat-label">${escapeHtml(singular)} mais crítico</div>
+          <div class="vendor-stat-value vendor-stat-value--name">${escapeHtml(criticalName)}</div>
+          <div class="vendor-stat-sub">${Math.max(criticalCount, 0)} tarefa(s) atrasada(s)</div>
+        </div>
+        <div class="vendor-stat-card">
+          <div class="vendor-stat-label">Maior volume</div>
+          <div class="vendor-stat-value vendor-stat-value--name">${escapeHtml(volumeName)}</div>
+          <div class="vendor-stat-sub">${Math.max(volumeCount, 0)} tarefa(s) no cronograma</div>
+        </div>
+      `;
+    }
+
+    function renderCard(group) {
+      const counts = {};
+      for (const stage of STAGE_LEGEND) counts[stage.key] = 0;
+      for (const task of group.tasks) {
+        const key = stageKeyFor(task.status);
+        if (key in counts) counts[key]++;
+      }
+      const total = group.tasks.length;
+      const atrasadasCount = counts.atrasado || 0;
+      const orderedStages = STAGE_LEGEND.filter((s) => counts[s.key] > 0)
+        .sort((a, b) => counts[b.key] - counts[a.key]);
+
+      const isOpen = !collapsedCards.has(group.name);
+      const showAll = showAllItems || expandedCards.has(group.name);
+      const visibleTasks = showAll ? group.tasks : group.tasks.slice(0, VENDOR_PREVIEW_LIMIT);
+      const remaining = group.tasks.length - visibleTasks.length;
+
+      const card = document.createElement("div");
+      card.className = "vendor-card";
+
+      const head = document.createElement("div");
+      head.className = "vendor-card-head";
+      head.innerHTML = `
+        <span class="tree-toggle ${isOpen ? "is-open" : ""}">▸</span>
+        <span class="vendor-card-name">${escapeHtml(group.name)}</span>
+        <span class="vendor-card-count">${total} tarefa(s) no cronograma</span>
+        ${atrasadasCount ? `<span class="vendor-card-badge">${atrasadasCount} atrasada${atrasadasCount > 1 ? "s" : ""}</span>` : ""}
+      `;
+      head.addEventListener("click", () => {
+        if (isOpen) collapsedCards.add(group.name); else collapsedCards.delete(group.name);
+        renderList();
+      });
+      card.appendChild(head);
+
+      if (isOpen) {
+        const bar = document.createElement("div");
+        bar.className = "vendor-card-bar";
+        bar.innerHTML = orderedStages.map((s) => {
+          const width = Math.max((counts[s.key] / total) * 100, 0.6);
+          return `<span style="width:${width}%;background:var(${s.color})" title="${escapeHtml(s.label)}: ${counts[s.key]}"></span>`;
+        }).join("");
+        card.appendChild(bar);
+
+        const list = document.createElement("div");
+        list.className = "vendor-task-list";
+        list.innerHTML = visibleTasks.map((task) => {
+          const stage = STAGE_LEGEND.find((s) => s.key === stageKeyFor(task.status));
+          const crumb = fmtBreadcrumb(task);
+          return `
+            <div class="vendor-task-row">
+              ${crumb ? `<div class="vendor-task-crumb">${escapeHtml(crumb)}</div>` : ""}
+              <div class="vendor-task-top">
+                <span class="vendor-task-name">${escapeHtml(taskLabel(task))}</span>
+                ${statusPillHtml(stage)}
+              </div>
+              <div class="vendor-task-meta">
+                ${task.responsavel && field !== "responsavel" ? `<span class="status-row-meta-item">${ICON_PERSON}${escapeHtml(task.responsavel)}</span>` : ""}
+                ${task.fornecedor && field !== "fornecedor" ? `<span class="status-row-meta-item">${ICON_TAG}${escapeHtml(task.fornecedor)}</span>` : ""}
+                ${task.data_inicio || task.data_fim ? `<span class="status-row-meta-item">${ICON_CALENDAR}${fmtTaskRange(task)}</span>` : ""}
+              </div>
+            </div>
+          `;
+        }).join("");
+        card.appendChild(list);
+
+        if (remaining > 0) {
+          const more = document.createElement("button");
+          more.type = "button";
+          more.className = "vendor-more-btn";
+          more.textContent = `Ver todas (${remaining} mais)`;
+          more.addEventListener("click", (e) => {
+            e.stopPropagation();
+            expandedCards.add(group.name);
+            renderList();
+          });
+          card.appendChild(more);
+        }
+      }
+
+      return card;
+    }
+
+    function renderList() {
+      const term = searchInput.value.trim().toLowerCase();
+      const groups = term
         ? allGroups
             .map((g) => ({
               name: g.name,
-              tasks: g.tasks.filter(
-                (t) => `${g.name} ${taskLabel(t)} ${t.eixo}`.toLowerCase().includes(q)
+              tasks: g.tasks.filter((t) =>
+                `${g.name} ${taskLabel(t)} ${fmtBreadcrumb(t)} ${t.responsavel} ${t.fornecedor}`
+                  .toLowerCase()
+                  .includes(term)
               ),
             }))
             .filter((g) => g.tasks.length > 0)
         : allGroups;
 
-      countEl.textContent = groups.length;
+      metaEl.textContent = `Exibindo ${term ? groups.length : "todos os"} ${plural}`;
       listEl.innerHTML = "";
 
       if (groups.length === 0) {
-        listEl.innerHTML = `<p class="empty-note">Nenhum ${emptyLabel} corresponde ao filtro atual.</p>`;
+        listEl.innerHTML = `<p class="empty-note">Nenhum ${escapeHtml(singular)} corresponde ao filtro atual.</p>`;
         return;
       }
 
       const frag = document.createDocumentFragment();
-      for (const group of groups) {
-        const counts = Object.fromEntries(STATUS_BUCKETS.map((b) => [b.key, 0]));
-        for (const task of group.tasks) counts[statusClass(task.status)]++;
-        const total = group.tasks.length;
-
-        const card = document.createElement("div");
-        card.className = "group-card";
-
-        const segments = STATUS_BUCKETS.map((b) => {
-          const width = total ? (counts[b.key] / total) * 24 : 0;
-          if (width === 0) return "";
-          return `<span class="seg" style="width:${width}px;background:var(${b.color})" title="${escapeHtml(b.label)}: ${counts[b.key]}"></span>`;
-        }).join("");
-
-        const head = document.createElement("div");
-        head.className = "group-card-head";
-        head.innerHTML = `
-          <span class="group-card-name">${escapeHtml(group.name)}</span>
-          <span class="group-card-meta">
-            <span class="status-breakdown">${segments}</span>
-            <span class="group-card-count">${total} tarefa(s)</span>
-            <span class="group-card-caret">▸</span>
-          </span>
-        `;
-        head.addEventListener("click", () => card.classList.toggle("is-open"));
-
-        const body = document.createElement("div");
-        body.className = "group-card-body";
-        body.innerHTML = group.tasks
-          .map((task) => {
-            const sClass = statusClass(task.status);
-            return `
-              <div class="group-task-row">
-                <span class="group-task-name">${escapeHtml(taskLabel(task))} <span class="group-task-eixo">— ${escapeHtml(task.eixo || "Sem eixo")}</span></span>
-                <span class="status-badge"><span class="status-dot ${sClass}"></span>${escapeHtml(task.status || "—")}</span>
-                <span class="group-task-dates">${fmtTaskRange(task)}</span>
-              </div>
-            `;
-          })
-          .join("");
-
-        card.appendChild(head);
-        card.appendChild(body);
-        frag.appendChild(card);
-      }
+      for (const group of groups) frag.appendChild(renderCard(group));
       listEl.appendChild(frag);
     }
 
-    searchInput.addEventListener("input", () => renderGroups(searchInput.value));
-    renderGroups("");
+    searchInput.addEventListener("input", renderList);
+    expandAllBtn.addEventListener("click", () => {
+      showAllItems = !showAllItems;
+      expandAllBtn.classList.toggle("is-active", showAllItems);
+      renderList();
+    });
+    collapseAllBtn.addEventListener("click", () => {
+      for (const group of allGroups) collapsedCards.add(group.name);
+      renderList();
+    });
+
+    function printSelectedGroups(selectedNames) {
+      const groups = allGroups.filter((g) => selectedNames.has(g.name));
+      const wasShowAll = showAllItems;
+      const wasCollapsed = new Set(collapsedCards);
+      showAllItems = true;
+      collapsedCards.clear();
+
+      const frag = document.createDocumentFragment();
+      for (const group of groups) frag.appendChild(renderCard(group));
+      listEl.innerHTML = "";
+      listEl.appendChild(frag);
+
+      window.print();
+
+      showAllItems = wasShowAll;
+      collapsedCards.clear();
+      for (const name of wasCollapsed) collapsedCards.add(name);
+      renderList();
+    }
+
+    const exportModal = buildExportModal({ prefix, title, plural, allGroups, onGenerate: printSelectedGroups });
+    exportBtn.addEventListener("click", () => exportModal.open());
+
+    renderSummary();
+    renderList();
   }
 
   // Constrói, a partir da lista plana de tarefas (com datas), a árvore
