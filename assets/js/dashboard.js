@@ -1,7 +1,125 @@
 (function () {
   "use strict";
 
-  const DATA_URL = "data/master_data.json";
+  const FALLBACK_DATA_URL = "data/master_data.json";
+  const SHEET_ID = "1QAFhpV61xjHTMSjjOxl5fwDSrXoHVjPBUfzs2iHLhjg";
+  const SHEET_TAB = "master data";
+  const SHEET_EDIT_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit`;
+  const LIVE_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_TAB)}`;
+
+  // Mesmo mapeamento de colunas usado em scripts/fetch_sheet_data.py.
+  const CSV_COLUMNS = {
+    1: "eixo", 2: "grupo", 3: "marco", 4: "tarefa", 5: "fornecedor", 6: "responsavel",
+    7: "prioridade", 8: "status", 9: "data_inicio", 10: "data_fim", 11: "duracao",
+    12: "predecessores", 15: "complexidade", 17: "progresso", 18: "encaminhamentos",
+  };
+  const CSV_AREA_COLUMNS = {
+    20: "FOYER", 21: "ÁREA 0 (pinguela)", 22: "ÁREA 1 (diversidade)",
+    23: "ÁREA 2 (oralidade e tecnologias)", 24: "ÁREA 3 (aturá e feira)", 25: "ÁREA 4 (crises)",
+    26: "ÁREA 5 (bem viver)", 27: "MEZANINO", 28: "EXPOSIÇÃO TEMPORÁRIA", 29: "LOJA",
+    30: "ÁREA EXTERNA DO MUSEU", 31: "ÁREAS COMUNS",
+  };
+  const CSV_FIRST_DATA_ROW = 2;
+
+  function parseCsv(text) {
+    const rows = [];
+    let row = [];
+    let field = "";
+    let inQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (inQuotes) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { field += '"'; i++; } else { inQuotes = false; }
+        } else {
+          field += c;
+        }
+      } else if (c === '"') {
+        inQuotes = true;
+      } else if (c === ",") {
+        row.push(field);
+        field = "";
+      } else if (c === "\r") {
+        // ignora
+      } else if (c === "\n") {
+        row.push(field);
+        rows.push(row);
+        row = [];
+        field = "";
+      } else {
+        field += c;
+      }
+    }
+    if (field.length > 0 || row.length > 0) {
+      row.push(field);
+      rows.push(row);
+    }
+    return rows;
+  }
+
+  function csvCell(row, idx) {
+    return idx < row.length && typeof row[idx] === "string" ? row[idx].trim() : "";
+  }
+
+  function parseDateBR(value) {
+    if (!value || value === "30/12/1899") return null;
+    const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value);
+    return m ? `${m[3]}-${m[2]}-${m[1]}` : null;
+  }
+
+  function parseDuracao(value) {
+    const n = parseInt(value, 10);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function buildTasksFromCsv(rows) {
+    const tasks = [];
+    for (let offset = 0; offset < rows.length - CSV_FIRST_DATA_ROW; offset++) {
+      const row = rows[CSV_FIRST_DATA_ROW + offset];
+      if (!row) continue;
+      const hasAny = Object.keys(CSV_COLUMNS).some((idx) => csvCell(row, idx));
+      if (!hasAny) continue;
+
+      const task = {};
+      for (const [idx, key] of Object.entries(CSV_COLUMNS)) {
+        task[key] = csvCell(row, idx);
+      }
+      task.linha = CSV_FIRST_DATA_ROW + offset + 1;
+      task.data_inicio = parseDateBR(task.data_inicio);
+      task.data_fim = parseDateBR(task.data_fim);
+      task.duracao = parseDuracao(task.duracao);
+      task.areas = Object.entries(CSV_AREA_COLUMNS)
+        .filter(([idx]) => csvCell(row, idx))
+        .map(([, name]) => name);
+
+      tasks.push(task);
+    }
+    return tasks;
+  }
+
+  async function loadPayload() {
+    try {
+      const res = await fetch(LIVE_CSV_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      const tasks = buildTasksFromCsv(parseCsv(text));
+      if (tasks.length === 0) throw new Error("nenhuma tarefa retornada");
+      return {
+        generated_at: new Date().toISOString(),
+        sheet_url: SHEET_EDIT_URL,
+        task_count: tasks.length,
+        tasks,
+        source: "live",
+      };
+    } catch (err) {
+      console.warn("Não foi possível buscar dados ao vivo da planilha, usando snapshot estático:", err);
+      const res = await fetch(FALLBACK_DATA_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const payload = await res.json();
+      payload.source = "fallback";
+      return payload;
+    }
+  }
 
   const STATUS_BUCKETS = [
     { key: "good", label: "Concluído", color: "--status-good" },
@@ -186,11 +304,9 @@
     const stateEl = document.getElementById("app-state");
     let payload;
     try {
-      const res = await fetch(DATA_URL, { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      payload = await res.json();
+      payload = await loadPayload();
     } catch (err) {
-      stateEl.textContent = `Não foi possível carregar os dados (${DATA_URL}). Detalhe: ${err.message}`;
+      stateEl.textContent = `Não foi possível carregar os dados. Detalhe: ${err.message}`;
       return;
     }
 
@@ -202,9 +318,11 @@
     document.getElementById("app-state").remove();
 
     const generated = new Date(payload.generated_at);
-    document.getElementById("generated-at").textContent = isNaN(generated)
+    const generatedText = isNaN(generated)
       ? "—"
       : generated.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+    document.getElementById("generated-at").textContent =
+      payload.source === "fallback" ? `${generatedText} (offline, dados de backup)` : `${generatedText} (ao vivo)`;
 
     renderDataQualityAlert(allTasks, payload.sheet_url);
 
