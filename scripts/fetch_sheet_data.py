@@ -112,11 +112,12 @@ def fetch_rows(creds):
 
 def build_tasks(rows):
     tasks = []
-    for row in rows[FIRST_DATA_ROW_INDEX:]:
+    for offset, row in enumerate(rows[FIRST_DATA_ROW_INDEX:]):
         if not any(cell(row, idx) for idx in COLUMNS):
             continue
 
         task = {key: cell(row, idx) for idx, key in COLUMNS.items()}
+        task["linha"] = FIRST_DATA_ROW_INDEX + offset + 1  # numero da linha na planilha (1-indexed)
         task["data_inicio"] = parse_date_br(task["data_inicio"])
         task["data_fim"] = parse_date_br(task["data_fim"])
         task["duracao"] = parse_duracao(task["duracao"])
@@ -138,6 +139,7 @@ def main():
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source_sheet": SPREADSHEET_ID,
         "source_tab": SHEET_TAB,
+        "sheet_url": f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit",
         "task_count": len(tasks),
         "tasks": tasks,
     }

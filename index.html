@@ -7,70 +7,143 @@
   <link rel="stylesheet" href="assets/css/dashboard.css" />
 </head>
 <body>
-  <div class="wrap">
-    <header class="top">
-      <h1>CCMEC — Cronograma 2026</h1>
-      <div class="meta">Atualizado em <span id="generated-at">—</span></div>
-    </header>
+  <div class="pattern-strip" role="presentation"></div>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="brand-mark"><span></span><span></span><span></span><span></span></div>
+      <div>
+        <div class="brand-title">DASHBOARD | CCMEC</div>
+        <div class="brand-sub">Centro Cultural do Ministério da Educação</div>
+        <div class="brand-sub">Cronograma 2026</div>
+      </div>
+    </div>
+    <div class="topbar-meta">Atualizado em <span id="generated-at">—</span></div>
+  </header>
 
+  <nav class="tabbar" id="tabbar">
+    <button class="tab-btn is-active" type="button" data-tab="gantt">Gantt</button>
+    <button class="tab-btn" type="button" data-tab="status">Status Report</button>
+    <button class="tab-btn" type="button" data-tab="fornecedores">Fornecedores</button>
+    <button class="tab-btn" type="button" data-tab="responsaveis">Responsáveis</button>
+  </nav>
+
+  <div class="wrap">
     <p id="app-state">Carregando dados…</p>
 
-    <section class="stat-row">
-      <div class="stat-tile">
-        <div class="label">Total de tarefas</div>
-        <div class="value" id="stat-total">—</div>
+    <div class="dq-alert" id="dq-alert" hidden>
+      <button type="button" class="dq-alert-bar" id="dq-alert-bar">
+        <span class="dq-alert-icon">⚠</span>
+        <span id="dq-alert-summary"></span>
+        <span class="dq-alert-caret">▾</span>
+        <a href="#" id="dq-alert-link" class="dq-alert-link" target="_blank" rel="noopener">→ Abrir planilha</a>
+      </button>
+      <div class="dq-alert-detail" id="dq-alert-detail" hidden>
+        <div class="dq-alert-row dq-alert-row--header">
+          <span>Linha</span>
+          <span>Eixo</span>
+          <span>Grupo</span>
+          <span>Tarefa</span>
+          <span>Colunas faltando</span>
+        </div>
+        <div id="dq-alert-rows"></div>
+        <p class="dq-alert-note">Corrija na planilha e clique em Atualizar.</p>
       </div>
-      <div class="stat-tile">
-        <div class="label">Com datas definidas</div>
-        <div class="value" id="stat-com-datas">—</div>
-      </div>
-      <div class="stat-tile">
-        <div class="label">Aguardando datas</div>
-        <div class="value" id="stat-sem-datas">—</div>
-      </div>
-      <div class="stat-tile">
-        <div class="label">Eixos</div>
-        <div class="value" id="stat-eixos">—</div>
-      </div>
-    </section>
+    </div>
 
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Cronograma (tarefas com datas definidas)</h2>
-        <span class="sub">Barras coloridas por Eixo</span>
-      </div>
-      <div class="controls">
-        <input type="search" id="search-input" placeholder="Buscar por tarefa, grupo ou responsável…" />
-        <div class="legend" id="legend"></div>
-      </div>
-      <div class="gantt-scroll">
-        <div class="gantt">
-          <div class="gantt-months" id="gantt-months"></div>
-          <div id="gantt-body"></div>
+    <section class="tab-panel" data-tab-panel="gantt">
+      <div class="dq-alert dq-alert--waiting" id="waiting-alert" hidden>
+        <button type="button" class="dq-alert-bar dq-alert-bar--waiting" id="waiting-alert-bar">
+          <span class="dq-alert-icon">⚠</span>
+          <span id="waiting-alert-summary"></span>
+          <span class="dq-alert-caret">▾</span>
+          <a href="#" id="waiting-alert-link" class="dq-alert-link" target="_blank" rel="noopener">→ Abrir planilha</a>
+        </button>
+        <div class="dq-alert-detail" id="waiting-alert-detail" hidden>
+          <div class="dq-alert-row dq-alert-row--header dq-alert-row--waiting">
+            <span>Linha</span>
+            <span>Eixo</span>
+            <span>Grupo</span>
+            <span>Tarefa</span>
+            <span>Datas faltando</span>
+          </div>
+          <div id="waiting-alert-rows" class="dq-alert-rows-scroll"></div>
+          <p class="dq-alert-note">Corrija na planilha e clique em Atualizar.</p>
         </div>
       </div>
+
+      <section class="panel">
+        <div class="panel-header panel-header--brand">
+          <h2 class="panel-title--xl">Cronograma Gantt por Eixo</h2>
+          <span class="sub">Barras coloridas por Status</span>
+          <div class="gantt-tools">
+            <div class="view-toggle">
+              <button type="button" class="view-toggle-btn is-active" id="view-monthly" data-view-mode="monthly">Mensal</button>
+              <button type="button" class="view-toggle-btn" id="view-weekly" data-view-mode="weekly">Semanal</button>
+            </div>
+            <div class="view-dropdown" id="view-dropdown">
+              <button type="button" class="view-dropdown-btn" id="view-dropdown-btn">
+                Visualização: <span id="view-dropdown-label">—</span> <span class="view-dropdown-caret">▾</span>
+              </button>
+              <div class="view-dropdown-menu" id="view-dropdown-menu" hidden>
+                <button type="button" data-level="eixos">Eixos</button>
+                <button type="button" data-level="grupo">Grupo</button>
+                <button type="button" data-level="marco">Marco</button>
+                <button type="button" data-level="tarefas">Tarefas</button>
+              </div>
+            </div>
+            <button type="button" class="view-collapse-btn" id="collapse-all-btn">▲ Recolher Tudo</button>
+          </div>
+        </div>
+        <div class="controls">
+          <input type="search" id="search-input" placeholder="Buscar por tarefa, grupo ou responsável…" />
+        </div>
+        <div class="controls controls--stage">
+          <div class="legend legend--stage" id="stage-legend"></div>
+        </div>
+        <div class="gantt-scroll">
+          <div class="gantt">
+            <div class="gantt-months" id="gantt-months"></div>
+            <div id="gantt-body"></div>
+          </div>
+        </div>
+      </section>
     </section>
 
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Tarefas aguardando definição de datas</h2>
-        <span class="sub"><span id="table-count">0</span> tarefa(s)</span>
-      </div>
-      <div class="table-scroll">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Eixo</th>
-              <th>Grupo</th>
-              <th>Tarefa</th>
-              <th>Responsável</th>
-              <th>Status</th>
-              <th>Prioridade</th>
-            </tr>
-          </thead>
-          <tbody id="table-body"></tbody>
-        </table>
-      </div>
+    <section class="tab-panel" data-tab-panel="status" hidden>
+      <section class="status-summary-row" id="status-summary-row"></section>
+      <section class="panel">
+        <div class="panel-header panel-header--brand">
+          <h2>Progresso por Eixo</h2>
+          <span class="sub">Distribuição de status dentro de cada eixo</span>
+        </div>
+        <div id="status-by-eixo"></div>
+      </section>
+    </section>
+
+    <section class="tab-panel" data-tab-panel="fornecedores" hidden>
+      <section class="panel">
+        <div class="panel-header panel-header--brand">
+          <h2>Fornecedores</h2>
+          <span class="sub"><span id="fornecedores-count">0</span> fornecedor(es)</span>
+        </div>
+        <div class="controls">
+          <input type="search" id="fornecedores-search" placeholder="Buscar por fornecedor ou tarefa…" />
+        </div>
+        <div class="group-list" id="fornecedores-list"></div>
+      </section>
+    </section>
+
+    <section class="tab-panel" data-tab-panel="responsaveis" hidden>
+      <section class="panel">
+        <div class="panel-header panel-header--brand">
+          <h2>Responsáveis</h2>
+          <span class="sub"><span id="responsaveis-count">0</span> responsável(is)</span>
+        </div>
+        <div class="controls">
+          <input type="search" id="responsaveis-search" placeholder="Buscar por responsável ou tarefa…" />
+        </div>
+        <div class="group-list" id="responsaveis-list"></div>
+      </section>
     </section>
 
     <p class="footer-note">Dados lidos da planilha "CCMEC - CRONOGRAMA 2026" (aba "master data"), atualizados periodicamente via GitHub Actions.</p>
