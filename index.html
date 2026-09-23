@@ -112,11 +112,20 @@
     <section class="tab-panel" data-tab-panel="status" hidden>
       <section class="status-summary-row" id="status-summary-row"></section>
       <section class="panel">
-        <div class="panel-header panel-header--brand">
-          <h2>Progresso por Eixo</h2>
-          <span class="sub">Distribuição de status dentro de cada eixo</span>
+        <div class="panel-header panel-header--brand status-report-header">
+          <div>
+            <h2 class="panel-title--xl">Status Report</h2>
+            <span class="sub" id="status-report-meta"></span>
+          </div>
+          <button type="button" class="view-collapse-btn" id="status-collapse-all-btn">▲ Recolher Tudo</button>
         </div>
-        <div id="status-by-eixo"></div>
+        <div class="controls">
+          <input type="search" id="status-search-input" placeholder="Buscar grupo, marco, responsável…" />
+        </div>
+        <div class="controls controls--stage">
+          <div class="legend legend--stage" id="status-stage-legend"></div>
+        </div>
+        <div id="status-tree"></div>
       </section>
     </section>
 

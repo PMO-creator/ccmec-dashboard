@@ -11,13 +11,13 @@
   const CSV_COLUMNS = {
     1: "eixo", 2: "grupo", 3: "marco", 4: "tarefa", 5: "fornecedor", 6: "responsavel",
     7: "prioridade", 8: "status", 9: "data_inicio", 10: "data_fim", 11: "duracao",
-    12: "predecessores", 15: "complexidade", 17: "progresso", 18: "encaminhamentos",
+    12: "predecessores", 15: "complexidade", 17: "progresso", 18: "impacto", 19: "encaminhamentos",
   };
   const CSV_AREA_COLUMNS = {
-    20: "FOYER", 21: "ÁREA 0 (pinguela)", 22: "ÁREA 1 (diversidade)",
-    23: "ÁREA 2 (oralidade e tecnologias)", 24: "ÁREA 3 (aturá e feira)", 25: "ÁREA 4 (crises)",
-    26: "ÁREA 5 (bem viver)", 27: "MEZANINO", 28: "EXPOSIÇÃO TEMPORÁRIA", 29: "LOJA",
-    30: "ÁREA EXTERNA DO MUSEU", 31: "ÁREAS COMUNS",
+    21: "FOYER", 22: "ÁREA 0 (pinguela)", 23: "ÁREA 1 (diversidade)",
+    24: "ÁREA 2 (oralidade e tecnologias)", 25: "ÁREA 3 (aturá e feira)", 26: "ÁREA 4 (crises)",
+    27: "ÁREA 5 (bem viver)", 28: "MEZANINO", 29: "EXPOSIÇÃO TEMPORÁRIA", 30: "LOJA",
+    31: "ÁREA EXTERNA DO MUSEU", 32: "ÁREAS COMUNS",
   };
   const CSV_FIRST_DATA_ROW = 2;
 
@@ -84,7 +84,9 @@
       for (const [idx, key] of Object.entries(CSV_COLUMNS)) {
         task[key] = csvCell(row, idx);
       }
-      task.linha = CSV_FIRST_DATA_ROW + offset + 1;
+      // O CSV ao vivo (gviz) descarta a linha 1, em branco, da planilha —
+      // por isso a linha real é uma posição maior do que o índice no CSV.
+      task.linha = CSV_FIRST_DATA_ROW + offset + 2;
       task.data_inicio = parseDateBR(task.data_inicio);
       task.data_fim = parseDateBR(task.data_fim);
       task.duracao = parseDuracao(task.duracao);
@@ -127,6 +129,16 @@
     { key: "warning", label: "Risco de atraso", color: "--status-warning" },
     { key: "critical", label: "Atrasado", color: "--status-critical" },
     { key: "neutral", label: "A definir / outros", color: "--status-neutral" },
+  ];
+
+  // Resumo no topo da aba Status Report — % de tarefas por estágio.
+  const STATUS_OVERVIEW_STAGES = [
+    { key: "feito", label: "Concluídas", color: "--stage-feito" },
+    { key: "andamento", label: "Em andamento", color: "--stage-andamento" },
+    { key: "iniciar", label: "A iniciar", color: "--stage-iniciar" },
+    { key: "atrasado", label: "Atrasadas", color: "--stage-atrasado" },
+    { key: "risco", label: "Risco de atraso", color: "--stage-risco" },
+    { key: "definir", label: "Definir datas", color: "--stage-definir" },
   ];
 
   // Estágios do STATUS (coluna I da planilha) — cor das barras do Gantt.
@@ -301,6 +313,7 @@
   async function main() {
     setupTabs();
     setupGanttTools();
+    setupStatusTools();
     const stateEl = document.getElementById("app-state");
     let payload;
     try {
@@ -339,6 +352,14 @@
       stageLegendEl.appendChild(item);
     }
 
+    const statusStageLegendEl = document.getElementById("status-stage-legend");
+    for (const stage of STAGE_LEGEND) {
+      const item = document.createElement("span");
+      item.className = "legend-item legend-item--static";
+      item.innerHTML = `<span class="legend-dot" style="background:var(${stage.color})"></span>${escapeHtml(stage.label)}`;
+      statusStageLegendEl.appendChild(item);
+    }
+
     const searchInput = document.getElementById("search-input");
     searchInput.addEventListener("input", () => {
       searchTerm = searchInput.value.trim().toLowerCase();
@@ -362,6 +383,28 @@
     initTooltip();
 
     renderStatusReport(allTasks);
+
+    let statusSearchTerm = "";
+    const statusSearchInput = document.getElementById("status-search-input");
+    statusSearchInput.addEventListener("input", () => {
+      statusSearchTerm = statusSearchInput.value.trim().toLowerCase();
+      applyStatusFilters();
+    });
+
+    function statusMatches(task) {
+      if (!statusSearchTerm) return true;
+      const hay = `${task.tarefa} ${task.responsavel} ${task.grupo} ${task.marco} ${task.eixo}`.toLowerCase();
+      return hay.includes(statusSearchTerm);
+    }
+
+    function applyStatusFilters() {
+      const matchedAll = allTasks.filter(statusMatches);
+      const eixoNames = new Set(matchedAll.map((t) => t.eixo || "Sem eixo definido"));
+      renderStatusTree(matchedAll, eixoNames);
+    }
+
+    applyStatusFilters();
+
     setupGroupTab({
       field: "fornecedor",
       tasks: allTasks,
@@ -382,56 +425,268 @@
 
   function renderStatusReport(allTasks) {
     const summaryEl = document.getElementById("status-summary-row");
-    const byEixoEl = document.getElementById("status-by-eixo");
     summaryEl.innerHTML = "";
-    byEixoEl.innerHTML = "";
 
-    const counts = Object.fromEntries(STATUS_BUCKETS.map((b) => [b.key, 0]));
-    for (const task of allTasks) counts[statusClass(task.status)]++;
-
-    for (const bucket of STATUS_BUCKETS) {
-      const tile = document.createElement("div");
-      tile.className = "status-tile";
-      tile.style.borderLeftColor = `var(${bucket.color})`;
-      tile.innerHTML = `
-        <div class="label">${escapeHtml(bucket.label)}</div>
-        <div class="value">${counts[bucket.key]}</div>
-      `;
-      summaryEl.appendChild(tile);
+    const total = allTasks.length;
+    const stageCounts = Object.fromEntries(STATUS_OVERVIEW_STAGES.map((s) => [s.key, 0]));
+    for (const task of allTasks) {
+      const key = stageKeyFor(task.status);
+      if (key in stageCounts) stageCounts[key]++;
     }
+    const pct = (n) => (total ? Math.round((n / total) * 100) : 0);
 
-    const eixoSet = new Set(allTasks.map((t) => t.eixo || "Sem eixo definido"));
-    const order = eixoDisplayOrder(eixoSet);
-    const byEixo = groupBy(allTasks, (t) => t.eixo || "Sem eixo definido");
+    const marcos = new Map();
+    for (const task of allTasks) {
+      const marco = (task.marco || "").trim();
+      if (!marco) continue;
+      if (!marcos.has(marco)) marcos.set(marco, []);
+      marcos.get(marco).push(task);
+    }
+    let marcosDone = 0;
+    for (const tasks of marcos.values()) {
+      if (tasks.every((t) => stageKeyFor(t.status) === "feito")) marcosDone++;
+    }
+    const marcosTotal = marcos.size;
+    const marcosPct = marcosTotal ? Math.round((marcosDone / marcosTotal) * 100) : 0;
 
-    if (allTasks.length === 0) {
-      byEixoEl.innerHTML = '<p class="empty-note">Nenhuma tarefa carregada.</p>';
+    const ringRadius = 40;
+    const ringCirc = 2 * Math.PI * ringRadius;
+    const ringOffset = ringCirc * (1 - marcosPct / 100);
+
+    // Maiores fatias primeiro, para a barra (esquerda→direita) e a legenda
+    // (ordem de leitura) apontarem sempre para o mesmo segmento.
+    const orderedStages = [...STATUS_OVERVIEW_STAGES].sort((a, b) => stageCounts[b.key] - stageCounts[a.key]);
+
+    const card = document.createElement("div");
+    card.className = "status-overview-card";
+    card.innerHTML = `
+      <svg class="status-ring" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="${marcosPct}% dos marcos concluídos">
+        <circle cx="48" cy="48" r="${ringRadius}" fill="none" stroke="var(--gridline)" stroke-width="12"/>
+        <circle cx="48" cy="48" r="${ringRadius}" fill="none" stroke="var(--brand-green)" stroke-width="12"
+          stroke-dasharray="${ringCirc.toFixed(1)}" stroke-dashoffset="${ringOffset.toFixed(1)}"
+          stroke-linecap="round" transform="rotate(-90 48 48)"/>
+        <text x="48" y="46" text-anchor="middle" class="status-ring-value">${marcosPct}%</text>
+        <text x="48" y="62" text-anchor="middle" class="status-ring-sub">${marcosDone} de ${marcosTotal}</text>
+      </svg>
+      <div class="status-overview-body">
+        <div class="status-overview-label">Marcos concluídos · distribuição de tarefas por status</div>
+        <div class="status-stage-bar">
+          ${orderedStages.map((s) => {
+            const count = stageCounts[s.key];
+            const width = count > 0 ? Math.max(pct(count), 0.6) : 0;
+            return `<span style="width:${width}%;background:var(${s.color})" title="${escapeHtml(s.label)}: ${count} (${pct(count)}%)"></span>`;
+          }).join("")}
+        </div>
+        <div class="status-stage-legend-row">
+          ${orderedStages.map((s) => `
+            <span class="status-stage-legend-item">
+              <span class="dot" style="background:var(${s.color})"></span>${escapeHtml(s.label)} <b>${pct(stageCounts[s.key])}%</b>
+            </span>
+          `).join("")}
+        </div>
+      </div>
+    `;
+    summaryEl.appendChild(card);
+  }
+
+  // Árvore expansível da aba Status Report (Eixo > Grupo > Marco > Tarefa),
+  // separada do estado de expansão do Gantt (mesma hierarquia, visual diferente).
+  const statusOpenState = new Set();
+  const statusTaskOpenState = new Set();
+  let lastStatusTasks = [];
+  let lastStatusEixoNames = null;
+
+  function toggleStatusNode(key) {
+    if (statusOpenState.has(key)) statusOpenState.delete(key); else statusOpenState.add(key);
+    renderStatusTree(lastStatusTasks, lastStatusEixoNames);
+  }
+
+  function toggleStatusTaskDetail(key) {
+    if (statusTaskOpenState.has(key)) statusTaskOpenState.delete(key); else statusTaskOpenState.add(key);
+    renderStatusTree(lastStatusTasks, lastStatusEixoNames);
+  }
+
+  function collapseAllStatus() {
+    statusOpenState.clear();
+    renderStatusTree(lastStatusTasks, lastStatusEixoNames);
+  }
+
+  function worstStage(tasks) {
+    const present = new Set(tasks.map((t) => stageKeyFor(t.status)));
+    for (const key of STAGE_PRIORITY) {
+      const found = STAGE_LEGEND.find((s) => s.key === key);
+      if (found && present.has(key)) return found;
+    }
+    return null;
+  }
+
+  function statusPillHtml(stage) {
+    if (!stage) return "";
+    const textColor = stage.key === "risco" ? "#2b2100" : "#ffffff";
+    return `<span class="status-pill" style="background:var(${stage.color});color:${textColor}">${escapeHtml(stage.label)}</span>`;
+  }
+
+  const ICON_CALENDAR = '<svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>';
+  const ICON_PERSON = '<svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>';
+  const ICON_TAG = '<svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 2h6l6 6-6 6-6-6V2z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg>';
+
+  function statusDetailField(label, value) {
+    const has = value && String(value).trim();
+    return `
+      <div class="status-detail-field">
+        <div class="status-detail-label">${escapeHtml(label)}</div>
+        <div class="status-detail-value${has ? "" : " is-empty"}">${has ? escapeHtml(value) : "Não preenchido"}</div>
+      </div>
+    `;
+  }
+
+  function renderStatusTaskRow(task, depth, container, keyPrefix) {
+    const key = `${keyPrefix}>t:${task.tarefa}:${task.data_inicio}`;
+    const isOpen = statusTaskOpenState.has(key);
+    const stage = STAGE_LEGEND.find((s) => s.key === stageKeyFor(task.status));
+    const missingLabel = !task.grupo ? "Sem grupo/marco" : !task.marco ? "Sem marco" : "";
+
+    const row = document.createElement("div");
+    row.className = `status-row status-row--task${task.tarefa ? "" : " is-placeholder"}`;
+    row.style.paddingLeft = `${16 + depth * 18}px`;
+    row.innerHTML = `
+      <span class="status-row-top">
+        <span class="tree-toggle ${isOpen ? "is-open" : ""}"></span>
+        <span class="status-checkbox"></span>
+        ${statusPillHtml(stage)}
+        <span class="status-row-name">${escapeHtml(taskLabel(task))}</span>
+        ${missingLabel ? `<span class="status-row-flag">${missingLabel}</span>` : ""}
+      </span>
+      <span class="status-row-meta">
+        ${task.data_inicio || task.data_fim ? `<span class="status-row-meta-item">${ICON_CALENDAR}${fmtTaskRange(task)}</span>` : ""}
+        ${task.responsavel ? `<span class="status-row-meta-item">${ICON_PERSON}${escapeHtml(task.responsavel)}</span>` : ""}
+        ${task.fornecedor ? `<span class="status-row-chip status-row-chip--fornecedor">${ICON_TAG}${escapeHtml(task.fornecedor)}</span>` : ""}
+      </span>
+    `;
+    row.addEventListener("click", () => toggleStatusTaskDetail(key));
+    container.appendChild(row);
+
+    if (isOpen) {
+      const detail = document.createElement("div");
+      detail.className = "status-detail";
+      detail.style.paddingLeft = `${16 + depth * 18 + 22}px`;
+      detail.innerHTML = [
+        statusDetailField("Prioridade", task.prioridade),
+        statusDetailField("Complexidade", task.complexidade),
+        statusDetailField("Progresso", task.progresso),
+        statusDetailField("Impacto", task.impacto),
+        statusDetailField("Encaminhamentos", task.encaminhamentos),
+      ].join("");
+      container.appendChild(detail);
+    }
+  }
+
+  function renderStatusChildren(container, nodes, depth, keyPrefix, eixoIndex) {
+    let grupoCounter = 0;
+    for (const node of nodes) {
+      if (node.type === "task") {
+        renderStatusTaskRow(node.task, depth, container, keyPrefix);
+        continue;
+      }
+
+      const isOpen = statusOpenState.has(node.key);
+      const hasChildren = node.children.length > 0;
+      const leafTasks = collectLeafTasks(node.children);
+      const stage = leafTasks.length
+        ? worstStage(leafTasks)
+        : node.self ? STAGE_LEGEND.find((s) => s.key === stageKeyFor(node.self.status)) : null;
+      const range = node.self && node.self.data_inicio && node.self.data_fim
+        ? { data_fim: node.self.data_fim }
+        : minMaxDates(leafTasks);
+
+      const row = document.createElement("div");
+      row.style.paddingLeft = `${16 + depth * 18}px`;
+
+      if (node.type === "grupo") {
+        grupoCounter++;
+        const marcoCount = node.children.filter((c) => c.type === "marco").length;
+        const countLabel = marcoCount ? `${marcoCount} marco(s)` : hasChildren ? `${node.children.length} tarefa(s)` : "sem marcos";
+        row.className = "status-row status-row--grupo";
+        row.innerHTML = `
+          <span class="tree-toggle ${hasChildren ? (isOpen ? "is-open" : "") : "tree-toggle--spacer"}">▸</span>
+          <span class="status-checkbox"></span>
+          <span class="status-row-dot" style="background:var(${stage ? stage.color : "--status-neutral"})"></span>
+          <span class="status-row-number">#${eixoIndex}.${grupoCounter}</span>
+          <span class="status-row-name">${escapeHtml(node.name)}</span>
+          <span class="status-row-meta">
+            ${range.data_fim ? `<span class="status-row-dates">até ${fmtDateBR(range.data_fim)}</span>` : ""}
+            ${statusPillHtml(stage)}
+            <span class="status-count-btn">▸ ${countLabel}</span>
+          </span>
+        `;
+      } else {
+        row.className = `status-row status-row--${node.type}`;
+        row.innerHTML = `
+          <span class="tree-toggle ${hasChildren ? (isOpen ? "is-open" : "") : "tree-toggle--spacer"}">▸</span>
+          <span class="status-checkbox"></span>
+          ${statusPillHtml(stage)}
+          <span class="status-row-name">${escapeHtml(node.name)}</span>
+          <span class="status-row-meta">
+            ${range.data_fim ? `<span class="status-row-dates">até ${fmtDateBR(range.data_fim)}</span>` : ""}
+          </span>
+        `;
+      }
+
+      if (hasChildren) row.addEventListener("click", () => toggleStatusNode(node.key));
+      container.appendChild(row);
+
+      if (isOpen && hasChildren) {
+        renderStatusChildren(container, node.children, depth + 1, node.key, eixoIndex);
+      }
+    }
+  }
+
+  function renderStatusTree(tasks, eixoNames) {
+    lastStatusTasks = tasks;
+    lastStatusEixoNames = eixoNames || null;
+    const container = document.getElementById("status-tree");
+    const metaEl = document.getElementById("status-report-meta");
+    container.innerHTML = "";
+
+    const tree = buildGanttTree(tasks, eixoNames);
+    const grupoTotal = tree.reduce((sum, e) => sum + e.children.filter((c) => c.type === "grupo").length, 0);
+    metaEl.textContent = `Exibindo ${tasks.length} tarefa(s) · ${tree.length} eixo(s) · ${grupoTotal} grupo(s)`;
+
+    if (tree.length === 0) {
+      container.innerHTML = '<p class="empty-note">Nenhuma tarefa corresponde ao filtro atual.</p>';
       return;
     }
 
-    for (const eixo of order) {
-      const eixoTasks = byEixo.get(eixo);
-      if (!eixoTasks) continue;
-      const colorVar = eixoColorVar(eixo);
-      const eixoCounts = Object.fromEntries(STATUS_BUCKETS.map((b) => [b.key, 0]));
-      for (const task of eixoTasks) eixoCounts[statusClass(task.status)]++;
-      const total = eixoTasks.length;
-      const done = eixoCounts.good;
+    tree.forEach((eixoNode, index) => {
+      const isOpen = statusOpenState.has(eixoNode.key);
+      const hasContent = eixoNode.children.length > 0;
+      const grupoCount = eixoNode.children.filter((c) => c.type === "grupo").length;
+      const countLabel = grupoCount > 0
+        ? `${grupoCount} grupo(s)`
+        : hasContent ? `${eixoNode.children.length} tarefa(s)` : "sem tarefas cadastradas";
+      const badgeColor = eixoStageColorVar(collectLeafTasks(eixoNode.children));
 
-      const row = document.createElement("div");
-      row.className = "eixo-progress-row";
-      const segments = STATUS_BUCKETS.map((b) => {
-        const pct = total ? (eixoCounts[b.key] / total) * 100 : 0;
-        if (pct === 0) return "";
-        return `<span class="seg" style="width:${pct}%;background:var(${b.color})" title="${escapeHtml(b.label)}: ${eixoCounts[b.key]}"></span>`;
-      }).join("");
-      row.innerHTML = `
-        <div class="eixo-progress-name"><span class="legend-dot" style="background:var(${colorVar})"></span>${escapeHtml(eixo)}</div>
-        <div class="eixo-progress-bar">${segments}</div>
-        <div class="eixo-progress-count">${done}/${total} concluída(s)</div>
-      `;
-      byEixoEl.appendChild(row);
-    }
+      const wrap = document.createElement("div");
+      wrap.className = "status-eixo-group";
+
+      const head = document.createElement("div");
+      head.className = `status-eixo-head${hasContent ? "" : " is-empty"}`;
+      head.innerHTML = `<span class="tree-toggle ${isOpen ? "is-open" : ""}">▸</span><span class="eixo-badge" style="background:var(${badgeColor})">${index + 1}</span><span class="status-row-name">${escapeHtml(eixoNode.name)}</span><span class="eixo-count">${countLabel}</span>`;
+      head.addEventListener("click", () => toggleStatusNode(eixoNode.key));
+      wrap.appendChild(head);
+
+      if (isOpen && hasContent) {
+        const body = document.createElement("div");
+        body.className = "status-eixo-body";
+        renderStatusChildren(body, eixoNode.children, 1, eixoNode.key, index + 1);
+        wrap.appendChild(body);
+      }
+      container.appendChild(wrap);
+    });
+  }
+
+  function setupStatusTools() {
+    document.getElementById("status-collapse-all-btn").addEventListener("click", collapseAllStatus);
   }
 
   function fmtTaskRange(task) {

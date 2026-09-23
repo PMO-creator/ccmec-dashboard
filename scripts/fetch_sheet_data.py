@@ -43,22 +43,23 @@ COLUMNS = {
     12: "predecessores",
     15: "complexidade",
     17: "progresso",
-    18: "encaminhamentos",
+    18: "impacto",
+    19: "encaminhamentos",
 }
 
 AREA_COLUMNS = {
-    20: "FOYER",
-    21: "ÁREA 0 (pinguela)",
-    22: "ÁREA 1 (diversidade)",
-    23: "ÁREA 2 (oralidade e tecnologias)",
-    24: "ÁREA 3 (aturá e feira)",
-    25: "ÁREA 4 (crises)",
-    26: "ÁREA 5 (bem viver)",
-    27: "MEZANINO",
-    28: "EXPOSIÇÃO TEMPORÁRIA",
-    29: "LOJA",
-    30: "ÁREA EXTERNA DO MUSEU",
-    31: "ÁREAS COMUNS",
+    21: "FOYER",
+    22: "ÁREA 0 (pinguela)",
+    23: "ÁREA 1 (diversidade)",
+    24: "ÁREA 2 (oralidade e tecnologias)",
+    25: "ÁREA 3 (aturá e feira)",
+    26: "ÁREA 4 (crises)",
+    27: "ÁREA 5 (bem viver)",
+    28: "MEZANINO",
+    29: "EXPOSIÇÃO TEMPORÁRIA",
+    30: "LOJA",
+    31: "ÁREA EXTERNA DO MUSEU",
+    32: "ÁREAS COMUNS",
 }
 
 HEADER_ROW_INDEX = 1  # linha 2 da planilha (0-indexed) tem os titulos das colunas
