@@ -10,7 +10,7 @@
   // Mesmo mapeamento de colunas usado em scripts/fetch_sheet_data.py.
   const CSV_COLUMNS = {
     1: "eixo", 2: "grupo", 3: "marco", 4: "tarefa", 5: "fornecedor", 6: "responsavel",
-    7: "prioridade", 8: "status", 9: "data_inicio", 10: "data_fim", 11: "duracao",
+    7: "status", 8: "prioridade", 9: "data_inicio", 10: "data_fim", 11: "duracao",
     12: "predecessores", 15: "complexidade", 17: "progresso", 18: "impacto", 19: "encaminhamentos",
   };
   const CSV_AREA_COLUMNS = {
@@ -74,8 +74,12 @@
 
   function buildTasksFromCsv(rows) {
     const tasks = [];
-    for (let offset = 0; offset < rows.length - CSV_FIRST_DATA_ROW; offset++) {
-      const row = rows[CSV_FIRST_DATA_ROW + offset];
+    // Localiza a linha de cabeçalho ("Eixo" na coluna B), que é a linha 2 da planilha.
+    // O gviz às vezes descarta a linha 1 em branco, então a posição no CSV varia.
+    let headerIdx = rows.findIndex((r) => csvCell(r, 1).toLowerCase() === "eixo");
+    if (headerIdx < 0) headerIdx = CSV_FIRST_DATA_ROW - 1;
+    for (let i = headerIdx + 1; i < rows.length; i++) {
+      const row = rows[i];
       if (!row) continue;
       const hasAny = Object.keys(CSV_COLUMNS).some((idx) => csvCell(row, idx));
       if (!hasAny) continue;
@@ -84,9 +88,7 @@
       for (const [idx, key] of Object.entries(CSV_COLUMNS)) {
         task[key] = csvCell(row, idx);
       }
-      // O CSV ao vivo (gviz) descarta a linha 1, em branco, da planilha —
-      // por isso a linha real é uma posição maior do que o índice no CSV.
-      task.linha = CSV_FIRST_DATA_ROW + offset + 2;
+      task.linha = i - headerIdx + 2; // cabeçalho = linha 2 da planilha
       task.data_inicio = parseDateBR(task.data_inicio);
       task.data_fim = parseDateBR(task.data_fim);
       task.duracao = parseDuracao(task.duracao);
