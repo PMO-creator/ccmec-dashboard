@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-05T00:45:17.085373+00:00",
+  "generated_at": "2026-10-05T06:18:02.404098+00:00",
   "source_sheet": "1QAFhpV61xjHTMSjjOxl5fwDSrXoHVjPBUfzs2iHLhjg",
   "source_tab": "master data",
   "sheet_url": "https://docs.google.com/spreadsheets/d/1QAFhpV61xjHTMSjjOxl5fwDSrXoHVjPBUfzs2iHLhjg/edit",
-  "task_count": 184,
+  "task_count": 189,
   "tasks": [
     {
       "eixo": "GESTÃO DO PROJETO",
@@ -434,9 +434,9 @@
       "responsavel": "Iago Gonçalves Pereira",
       "status": "Definir Datas",
       "prioridade": "",
-      "data_inicio": "2026-11-03",
+      "data_inicio": "2026-09-18",
       "data_fim": "2027-07-01",
-      "duracao": 240,
+      "duracao": 286,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
@@ -529,13 +529,13 @@
       "eixo": "INSTITUCIONAL",
       "grupo": "INSTITUCIONAL",
       "marco": "REUNIÃO COMITÊ INSTITUCIONAL",
-      "tarefa": "COLOCAR DATAS REUNIÕES TODA TERCEIRA SEXTA",
+      "tarefa": "1ª reunião",
       "fornecedor": "",
       "responsavel": "Iago Gonçalves Pereira",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
+      "data_inicio": "2026-09-18",
+      "data_fim": "2026-09-18",
       "duracao": null,
       "predecessores": "",
       "complexidade": "",
@@ -549,13 +549,13 @@
       "eixo": "INSTITUCIONAL",
       "grupo": "INSTITUCIONAL",
       "marco": "REUNIÃO COMITÊ INSTITUCIONAL",
-      "tarefa": "COLOCAR DATAS REUNIÕES TODA TERCEIRA SEXTA",
+      "tarefa": "2ª reunião",
       "fornecedor": "",
       "responsavel": "Iago Gonçalves Pereira",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
+      "data_inicio": "2026-10-15",
+      "data_fim": "2026-10-15",
       "duracao": null,
       "predecessores": "",
       "complexidade": "",
@@ -569,13 +569,13 @@
       "eixo": "INSTITUCIONAL",
       "grupo": "INSTITUCIONAL",
       "marco": "REUNIÃO COMITÊ INSTITUCIONAL",
-      "tarefa": "COLOCAR DATAS REUNIÕES TODA TERCEIRA SEXTA",
+      "tarefa": "3ª reunião",
       "fornecedor": "",
       "responsavel": "Iago Gonçalves Pereira",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
+      "data_inicio": "2026-11-19",
+      "data_fim": "2026-11-19",
       "duracao": null,
       "predecessores": "",
       "complexidade": "",
@@ -586,16 +586,16 @@
       "areas": []
     },
     {
-      "eixo": "INSTITUCIONAL",
-      "grupo": "INSTITUCIONAL",
-      "marco": "REUNIÃO COMITÊ INSTITUCIONAL",
-      "tarefa": "COLOCAR DATAS REUNIÕES TODA TERCEIRA SEXTA",
+      "eixo": "",
+      "grupo": "",
+      "marco": "",
+      "tarefa": "4ª reunião",
       "fornecedor": "",
-      "responsavel": "Iago Gonçalves Pereira",
+      "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
+      "data_inicio": "2026-12-18",
+      "data_fim": "2026-12-18",
       "duracao": null,
       "predecessores": "",
       "complexidade": "",
@@ -606,16 +606,16 @@
       "areas": []
     },
     {
-      "eixo": "INSTITUCIONAL",
-      "grupo": "INSTITUCIONAL",
-      "marco": "REUNIÃO COMITÊ INSTITUCIONAL",
-      "tarefa": "COLOCAR DATAS REUNIÕES TODA TERCEIRA SEXTA",
+      "eixo": "",
+      "grupo": "",
+      "marco": "",
+      "tarefa": "5ª reunião",
       "fornecedor": "",
-      "responsavel": "Iago Gonçalves Pereira",
+      "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
+      "data_inicio": "2027-01-15",
+      "data_fim": "2027-01-15",
       "duracao": null,
       "predecessores": "",
       "complexidade": "",
@@ -623,6 +623,106 @@
       "impacto": "",
       "encaminhamentos": "",
       "linha": 33,
+      "areas": []
+    },
+    {
+      "eixo": "",
+      "grupo": "",
+      "marco": "",
+      "tarefa": "6ª reunião",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": "2027-02-19",
+      "data_fim": "2027-02-19",
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 34,
+      "areas": []
+    },
+    {
+      "eixo": "",
+      "grupo": "",
+      "marco": "",
+      "tarefa": "7ª reunião",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": "2027-03-19",
+      "data_fim": "2027-03-19",
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 35,
+      "areas": []
+    },
+    {
+      "eixo": "",
+      "grupo": "",
+      "marco": "",
+      "tarefa": "8ª reunião",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": "2027-04-16",
+      "data_fim": "2027-04-16",
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 36,
+      "areas": []
+    },
+    {
+      "eixo": "",
+      "grupo": "",
+      "marco": "",
+      "tarefa": "9ª reunião",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": "2027-05-21",
+      "data_fim": "2027-05-21",
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 37,
+      "areas": []
+    },
+    {
+      "eixo": "INSTITUCIONAL",
+      "grupo": "INSTITUCIONAL",
+      "marco": "REUNIÃO COMITÊ INSTITUCIONAL",
+      "tarefa": "10ª reunião",
+      "fornecedor": "",
+      "responsavel": "Iago Gonçalves Pereira",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": "2027-06-18",
+      "data_fim": "2027-06-18",
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 38,
       "areas": []
     },
     {
@@ -642,7 +742,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 34,
+      "linha": 39,
       "areas": []
     },
     {
@@ -662,7 +762,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 35,
+      "linha": 40,
       "areas": []
     },
     {
@@ -682,7 +782,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 36,
+      "linha": 41,
       "areas": []
     },
     {
@@ -702,7 +802,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 37,
+      "linha": 42,
       "areas": []
     },
     {
@@ -722,7 +822,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 38,
+      "linha": 43,
       "areas": []
     },
     {
@@ -742,7 +842,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 39,
+      "linha": 44,
       "areas": []
     },
     {
@@ -762,7 +862,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 40,
+      "linha": 45,
       "areas": []
     },
     {
@@ -782,7 +882,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 41,
+      "linha": 46,
       "areas": []
     },
     {
@@ -802,7 +902,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 42,
+      "linha": 47,
       "areas": []
     },
     {
@@ -822,7 +922,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 43,
+      "linha": 48,
       "areas": []
     },
     {
@@ -842,7 +942,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 44,
+      "linha": 49,
       "areas": []
     },
     {
@@ -862,14 +962,14 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 45,
+      "linha": 50,
       "areas": []
     },
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
       "marco": "CURADORIA",
-      "tarefa": "",
+      "tarefa": "Elaboração do briefing",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
@@ -882,14 +982,14 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 46,
+      "linha": 51,
       "areas": []
     },
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
       "marco": "CURADORIA",
-      "tarefa": "",
+      "tarefa": "Envio proposta",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
@@ -902,14 +1002,14 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 47,
+      "linha": 52,
       "areas": []
     },
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
       "marco": "CURADORIA",
-      "tarefa": "",
+      "tarefa": "Contratação",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
@@ -922,7 +1022,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 48,
+      "linha": 53,
       "areas": []
     },
     {
@@ -942,14 +1042,14 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 49,
+      "linha": 54,
       "areas": []
     },
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
       "marco": "PESQUISADORES",
-      "tarefa": "",
+      "tarefa": "Elaboração do briefing",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
@@ -962,14 +1062,14 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 50,
+      "linha": 55,
       "areas": []
     },
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
       "marco": "PESQUISADORES",
-      "tarefa": "",
+      "tarefa": "Envio proposta",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
@@ -982,14 +1082,14 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 51,
+      "linha": 56,
       "areas": []
     },
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
       "marco": "PESQUISADORES",
-      "tarefa": "",
+      "tarefa": "Contratação",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
@@ -1002,7 +1102,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 52,
+      "linha": 57,
       "areas": []
     },
     {
@@ -1022,7 +1122,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 53,
+      "linha": 58,
       "areas": [
         "FOYER",
         "ÁREA 0 (pinguela)",
@@ -1055,7 +1155,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 54,
+      "linha": 59,
       "areas": []
     },
     {
@@ -1075,7 +1175,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 55,
+      "linha": 60,
       "areas": []
     },
     {
@@ -1095,7 +1195,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 56,
+      "linha": 61,
       "areas": []
     },
     {
@@ -1115,7 +1215,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 57,
+      "linha": 62,
       "areas": []
     },
     {
@@ -1135,7 +1235,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 58,
+      "linha": 63,
       "areas": []
     },
     {
@@ -1155,7 +1255,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 59,
+      "linha": 64,
       "areas": []
     },
     {
@@ -1175,7 +1275,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 60,
+      "linha": 65,
       "areas": []
     },
     {
@@ -1195,7 +1295,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 61,
+      "linha": 66,
       "areas": []
     },
     {
@@ -1215,7 +1315,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 62,
+      "linha": 67,
       "areas": []
     },
     {
@@ -1235,7 +1335,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 63,
+      "linha": 68,
       "areas": []
     },
     {
@@ -1255,121 +1355,21 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 64,
-      "areas": []
-    },
-    {
-      "eixo": "CURADORIA E CONTEÚDO",
-      "grupo": "PRODUÇÃO",
-      "marco": "PROGRAMA DE ACESSIBILIDADE",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 65,
-      "areas": []
-    },
-    {
-      "eixo": "CURADORIA E CONTEÚDO",
-      "grupo": "PRODUÇÃO",
-      "marco": "PROGRAMA DE ACESSIBILIDADE",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 66,
-      "areas": []
-    },
-    {
-      "eixo": "CURADORIA E CONTEÚDO",
-      "grupo": "PRODUÇÃO",
-      "marco": "PROGRAMA DE ACESSIBILIDADE",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 67,
-      "areas": []
-    },
-    {
-      "eixo": "CURADORIA E CONTEÚDO",
-      "grupo": "PRODUÇÃO",
-      "marco": "",
-      "tarefa": "PROGRAMA DE EDUCATIVO",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "Cancelado",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 68,
-      "areas": []
-    },
-    {
-      "eixo": "CURADORIA E CONTEÚDO",
-      "grupo": "PRODUÇÃO",
-      "marco": "PROGRAMA DE EDUCATIVO",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
       "linha": 69,
       "areas": []
     },
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
-      "marco": "PROGRAMA DE EDUCATIVO",
-      "tarefa": "",
+      "marco": "PROGRAMA DE ACESSIBILIDADE",
+      "tarefa": "Elaboração do briefing",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-10-07",
+      "data_fim": "2026-10-14",
+      "duracao": 7,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
@@ -1381,15 +1381,15 @@
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
-      "marco": "PROGRAMA DE EDUCATIVO",
-      "tarefa": "",
+      "marco": "PROGRAMA DE ACESSIBILIDADE",
+      "tarefa": "Envio proposta",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-10-14",
+      "data_fim": "2026-10-15",
+      "duracao": 1,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
@@ -1401,15 +1401,15 @@
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
-      "marco": "PROGRAMA DE EDUCATIVO",
-      "tarefa": "",
+      "marco": "PROGRAMA DE ACESSIBILIDADE",
+      "tarefa": "Contratação",
       "fornecedor": "",
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-10-15",
+      "data_fim": "2026-11-04",
+      "duracao": 20,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
@@ -1421,11 +1421,11 @@
     {
       "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "PRODUÇÃO",
-      "marco": "PROGRAMA DE EDUCATIVO",
-      "tarefa": "",
+      "marco": "",
+      "tarefa": "PROGRAMA DE EDUCATIVO",
       "fornecedor": "",
       "responsavel": "",
-      "status": "",
+      "status": "Cancelado",
       "prioridade": "",
       "data_inicio": null,
       "data_fim": null,
@@ -1460,6 +1460,106 @@
     },
     {
       "eixo": "CURADORIA E CONTEÚDO",
+      "grupo": "PRODUÇÃO",
+      "marco": "PROGRAMA DE EDUCATIVO",
+      "tarefa": "",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 75,
+      "areas": []
+    },
+    {
+      "eixo": "CURADORIA E CONTEÚDO",
+      "grupo": "PRODUÇÃO",
+      "marco": "PROGRAMA DE EDUCATIVO",
+      "tarefa": "",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 76,
+      "areas": []
+    },
+    {
+      "eixo": "CURADORIA E CONTEÚDO",
+      "grupo": "PRODUÇÃO",
+      "marco": "PROGRAMA DE EDUCATIVO",
+      "tarefa": "",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 77,
+      "areas": []
+    },
+    {
+      "eixo": "CURADORIA E CONTEÚDO",
+      "grupo": "PRODUÇÃO",
+      "marco": "PROGRAMA DE EDUCATIVO",
+      "tarefa": "",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 78,
+      "areas": []
+    },
+    {
+      "eixo": "CURADORIA E CONTEÚDO",
+      "grupo": "PRODUÇÃO",
+      "marco": "PROGRAMA DE EDUCATIVO",
+      "tarefa": "",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 79,
+      "areas": []
+    },
+    {
+      "eixo": "CURADORIA E CONTEÚDO",
       "grupo": "",
       "marco": "",
       "tarefa": "DESENVOLVIMENTO",
@@ -1475,7 +1575,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 75,
+      "linha": 80,
       "areas": []
     },
     {
@@ -1495,7 +1595,27 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 76,
+      "linha": 81,
+      "areas": []
+    },
+    {
+      "eixo": "CURADORIA E CONTEÚDO",
+      "grupo": "DESENVOLVIMENTO",
+      "marco": "RELATÓRIO DE ESPAÇOS CULTURAIS (BENCHMARKING)",
+      "tarefa": "Levantamento de espaços",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": "2026-09-21",
+      "data_fim": "2026-09-21",
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 82,
       "areas": []
     },
     {
@@ -1515,27 +1635,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 77,
-      "areas": []
-    },
-    {
-      "eixo": "CURADORIA E CONTEÚDO",
-      "grupo": "DESENVOLVIMENTO",
-      "marco": "RELATÓRIO DE ESPAÇOS CULTURAIS (BENCHMARKING)",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": "2026-09-21",
-      "data_fim": "2026-09-21",
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 78,
+      "linha": 83,
       "areas": []
     },
     {
@@ -1555,7 +1655,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 79,
+      "linha": 84,
       "areas": []
     },
     {
@@ -1575,7 +1675,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 80,
+      "linha": 85,
       "areas": []
     },
     {
@@ -1595,7 +1695,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 81,
+      "linha": 86,
       "areas": []
     },
     {
@@ -1615,7 +1715,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 82,
+      "linha": 87,
       "areas": []
     },
     {
@@ -1635,7 +1735,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 83,
+      "linha": 88,
       "areas": []
     },
     {
@@ -1647,15 +1747,15 @@
       "responsavel": "Produção e Exposições",
       "status": "A Iniciar",
       "prioridade": "",
-      "data_inicio": "2026-09-21",
-      "data_fim": "2026-10-20",
-      "duracao": 29,
+      "data_inicio": "2026-10-06",
+      "data_fim": "2026-11-02",
+      "duracao": 27,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 84,
+      "linha": 89,
       "areas": []
     },
     {
@@ -1667,15 +1767,15 @@
       "responsavel": "Produção e Exposições",
       "status": "A Iniciar",
       "prioridade": "",
-      "data_inicio": "2026-09-21",
-      "data_fim": "2026-09-24",
+      "data_inicio": "2026-10-06",
+      "data_fim": "2026-10-09",
       "duracao": 3,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 85,
+      "linha": 90,
       "areas": []
     },
     {
@@ -1687,15 +1787,15 @@
       "responsavel": "Produção e Exposições",
       "status": "A Iniciar",
       "prioridade": "",
-      "data_inicio": "2026-09-24",
-      "data_fim": "2026-09-29",
-      "duracao": 5,
+      "data_inicio": "2026-10-09",
+      "data_fim": "2026-10-13",
+      "duracao": 4,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 86,
+      "linha": 91,
       "areas": []
     },
     {
@@ -1707,15 +1807,15 @@
       "responsavel": "Produção e Exposições",
       "status": "A Iniciar",
       "prioridade": "",
-      "data_inicio": "2026-09-30",
-      "data_fim": "2026-10-20",
+      "data_inicio": "2026-10-13",
+      "data_fim": "2026-11-02",
       "duracao": 20,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 87,
+      "linha": 92,
       "areas": []
     },
     {
@@ -1735,7 +1835,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 88,
+      "linha": 93,
       "areas": []
     },
     {
@@ -1747,15 +1847,15 @@
       "responsavel": "Produção e Exposições",
       "status": "A Iniciar",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": 0,
+      "data_inicio": "2026-09-23",
+      "data_fim": "2026-10-27",
+      "duracao": 34,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 89,
+      "linha": 94,
       "areas": []
     },
     {
@@ -1767,15 +1867,15 @@
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-09-23",
+      "data_fim": "2026-09-23",
+      "duracao": 0,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 90,
+      "linha": 95,
       "areas": []
     },
     {
@@ -1787,15 +1887,15 @@
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-10-07",
+      "data_fim": "2026-10-07",
+      "duracao": 0,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 91,
+      "linha": 96,
       "areas": []
     },
     {
@@ -1807,15 +1907,15 @@
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-10-07",
+      "data_fim": "2026-10-27",
+      "duracao": 20,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 92,
+      "linha": 97,
       "areas": []
     },
     {
@@ -1835,7 +1935,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 93,
+      "linha": 98,
       "areas": []
     },
     {
@@ -1847,15 +1947,15 @@
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-10-27",
+      "data_fim": "2026-11-06",
+      "duracao": 10,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 94,
+      "linha": 99,
       "areas": []
     },
     {
@@ -1867,15 +1967,15 @@
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-11-02",
+      "data_fim": "2026-11-02",
+      "duracao": 0,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 95,
+      "linha": 100,
       "areas": []
     },
     {
@@ -1887,15 +1987,15 @@
       "responsavel": "",
       "status": "",
       "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
+      "data_inicio": "2026-11-06",
+      "data_fim": "2026-11-26",
+      "duracao": 20,
       "predecessores": "",
       "complexidade": "",
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 96,
+      "linha": 101,
       "areas": []
     },
     {
@@ -1915,7 +2015,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 97,
+      "linha": 102,
       "areas": []
     },
     {
@@ -1935,7 +2035,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 98,
+      "linha": 103,
       "areas": []
     },
     {
@@ -1955,7 +2055,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 99,
+      "linha": 104,
       "areas": []
     },
     {
@@ -1975,7 +2075,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 100,
+      "linha": 105,
       "areas": []
     },
     {
@@ -1995,7 +2095,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 101,
+      "linha": 106,
       "areas": []
     },
     {
@@ -2015,7 +2115,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 102,
+      "linha": 107,
       "areas": []
     },
     {
@@ -2035,7 +2135,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 103,
+      "linha": 108,
       "areas": []
     },
     {
@@ -2055,7 +2155,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 104,
+      "linha": 109,
       "areas": []
     },
     {
@@ -2075,7 +2175,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 105,
+      "linha": 110,
       "areas": []
     },
     {
@@ -2095,7 +2195,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 106,
+      "linha": 111,
       "areas": []
     },
     {
@@ -2115,7 +2215,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 107,
+      "linha": 112,
       "areas": []
     },
     {
@@ -2135,7 +2235,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 108,
+      "linha": 113,
       "areas": []
     },
     {
@@ -2155,7 +2255,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 109,
+      "linha": 114,
       "areas": []
     },
     {
@@ -2175,7 +2275,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 110,
+      "linha": 115,
       "areas": []
     },
     {
@@ -2195,7 +2295,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 111,
+      "linha": 116,
       "areas": []
     },
     {
@@ -2215,7 +2315,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 112,
+      "linha": 117,
       "areas": []
     },
     {
@@ -2235,7 +2335,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 113,
+      "linha": 118,
       "areas": []
     },
     {
@@ -2255,7 +2355,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 114,
+      "linha": 119,
       "areas": []
     },
     {
@@ -2275,7 +2375,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 115,
+      "linha": 120,
       "areas": []
     },
     {
@@ -2295,7 +2395,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 116,
+      "linha": 121,
       "areas": []
     },
     {
@@ -2315,7 +2415,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 117,
+      "linha": 122,
       "areas": []
     },
     {
@@ -2335,7 +2435,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 118,
+      "linha": 123,
       "areas": []
     },
     {
@@ -2355,7 +2455,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 119,
+      "linha": 124,
       "areas": []
     },
     {
@@ -2375,7 +2475,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 120,
+      "linha": 125,
       "areas": []
     },
     {
@@ -2395,7 +2495,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 121,
+      "linha": 126,
       "areas": []
     },
     {
@@ -2415,7 +2515,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 122,
+      "linha": 127,
       "areas": []
     },
     {
@@ -2435,7 +2535,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 123,
+      "linha": 128,
       "areas": []
     },
     {
@@ -2455,7 +2555,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 124,
+      "linha": 129,
       "areas": []
     },
     {
@@ -2475,7 +2575,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 125,
+      "linha": 130,
       "areas": []
     },
     {
@@ -2495,7 +2595,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 126,
+      "linha": 131,
       "areas": []
     },
     {
@@ -2515,7 +2615,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 127,
+      "linha": 132,
       "areas": []
     },
     {
@@ -2535,7 +2635,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 128,
+      "linha": 133,
       "areas": []
     },
     {
@@ -2555,7 +2655,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 129,
+      "linha": 134,
       "areas": []
     },
     {
@@ -2575,7 +2675,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 130,
+      "linha": 135,
       "areas": []
     },
     {
@@ -2595,7 +2695,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 131,
+      "linha": 136,
       "areas": []
     },
     {
@@ -2615,7 +2715,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 132,
+      "linha": 137,
       "areas": []
     },
     {
@@ -2635,7 +2735,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 133,
+      "linha": 138,
       "areas": []
     },
     {
@@ -2655,7 +2755,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 134,
+      "linha": 139,
       "areas": []
     },
     {
@@ -2675,116 +2775,16 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 135,
-      "areas": []
-    },
-    {
-      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
-      "grupo": "DESENVOLVIMENTO",
-      "marco": "DESENVOLVIMENTO EXPERIÊNCIAS (TECNOLOGIA)",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 136,
-      "areas": []
-    },
-    {
-      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
-      "grupo": "DESENVOLVIMENTO",
-      "marco": "DESENVOLVIMENTO EXPERIÊNCIAS (TECNOLOGIA)",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 137,
-      "areas": []
-    },
-    {
-      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
-      "grupo": "DESENVOLVIMENTO",
-      "marco": "",
-      "tarefa": "PROJETO DE ILUMINAÇÃO EXPOGRÁFICA",
-      "fornecedor": "",
-      "responsavel": "Produção e Exposições",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 138,
-      "areas": []
-    },
-    {
-      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
-      "grupo": "DESENVOLVIMENTO",
-      "marco": "PROJETO DE ILUMINAÇÃO EXPOGRÁFICA",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
-      "linha": 139,
-      "areas": []
-    },
-    {
-      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
-      "grupo": "DESENVOLVIMENTO",
-      "marco": "PROJETO DE ILUMINAÇÃO EXPOGRÁFICA",
-      "tarefa": "",
-      "fornecedor": "",
-      "responsavel": "",
-      "status": "",
-      "prioridade": "",
-      "data_inicio": null,
-      "data_fim": null,
-      "duracao": null,
-      "predecessores": "",
-      "complexidade": "",
-      "progresso": "",
-      "impacto": "",
-      "encaminhamentos": "",
       "linha": 140,
       "areas": []
     },
     {
       "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
       "grupo": "DESENVOLVIMENTO",
-      "marco": "",
-      "tarefa": "PROJETO DE SONORIZAÇÃO E ACÚSTICA EXPOGRÁFICA",
+      "marco": "DESENVOLVIMENTO EXPERIÊNCIAS (TECNOLOGIA)",
+      "tarefa": "",
       "fornecedor": "",
-      "responsavel": "Produção e Exposições",
+      "responsavel": "",
       "status": "",
       "prioridade": "",
       "data_inicio": null,
@@ -2801,7 +2801,7 @@
     {
       "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
       "grupo": "DESENVOLVIMENTO",
-      "marco": "PROJETO DE SONORIZAÇÃO E ACÚSTICA EXPOGRÁFICA",
+      "marco": "DESENVOLVIMENTO EXPERIÊNCIAS (TECNOLOGIA)",
       "tarefa": "",
       "fornecedor": "",
       "responsavel": "",
@@ -2821,6 +2821,86 @@
     {
       "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
       "grupo": "DESENVOLVIMENTO",
+      "marco": "",
+      "tarefa": "PROJETO DE ILUMINAÇÃO EXPOGRÁFICA",
+      "fornecedor": "",
+      "responsavel": "Produção e Exposições",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 143,
+      "areas": []
+    },
+    {
+      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
+      "grupo": "DESENVOLVIMENTO",
+      "marco": "PROJETO DE ILUMINAÇÃO EXPOGRÁFICA",
+      "tarefa": "",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 144,
+      "areas": []
+    },
+    {
+      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
+      "grupo": "DESENVOLVIMENTO",
+      "marco": "PROJETO DE ILUMINAÇÃO EXPOGRÁFICA",
+      "tarefa": "",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 145,
+      "areas": []
+    },
+    {
+      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
+      "grupo": "DESENVOLVIMENTO",
+      "marco": "",
+      "tarefa": "PROJETO DE SONORIZAÇÃO E ACÚSTICA EXPOGRÁFICA",
+      "fornecedor": "",
+      "responsavel": "Produção e Exposições",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 146,
+      "areas": []
+    },
+    {
+      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
+      "grupo": "DESENVOLVIMENTO",
       "marco": "PROJETO DE SONORIZAÇÃO E ACÚSTICA EXPOGRÁFICA",
       "tarefa": "",
       "fornecedor": "",
@@ -2835,7 +2915,27 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 143,
+      "linha": 147,
+      "areas": []
+    },
+    {
+      "eixo": "EXPOGRAFIA E CONTEÚDO APLICADO",
+      "grupo": "DESENVOLVIMENTO",
+      "marco": "PROJETO DE SONORIZAÇÃO E ACÚSTICA EXPOGRÁFICA",
+      "tarefa": "",
+      "fornecedor": "",
+      "responsavel": "",
+      "status": "",
+      "prioridade": "",
+      "data_inicio": null,
+      "data_fim": null,
+      "duracao": null,
+      "predecessores": "",
+      "complexidade": "",
+      "progresso": "",
+      "impacto": "",
+      "encaminhamentos": "",
+      "linha": 148,
       "areas": []
     },
     {
@@ -2855,7 +2955,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 144,
+      "linha": 149,
       "areas": []
     },
     {
@@ -2875,7 +2975,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 145,
+      "linha": 150,
       "areas": []
     },
     {
@@ -2895,7 +2995,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 146,
+      "linha": 151,
       "areas": []
     },
     {
@@ -2915,7 +3015,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 147,
+      "linha": 152,
       "areas": []
     },
     {
@@ -2935,7 +3035,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 148,
+      "linha": 153,
       "areas": []
     },
     {
@@ -2955,7 +3055,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 149,
+      "linha": 154,
       "areas": []
     },
     {
@@ -2975,7 +3075,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 150,
+      "linha": 155,
       "areas": []
     },
     {
@@ -2995,7 +3095,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 151,
+      "linha": 156,
       "areas": []
     },
     {
@@ -3015,7 +3115,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 152,
+      "linha": 157,
       "areas": []
     },
     {
@@ -3035,7 +3135,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 153,
+      "linha": 158,
       "areas": []
     },
     {
@@ -3055,7 +3155,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 154,
+      "linha": 159,
       "areas": []
     },
     {
@@ -3075,7 +3175,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 155,
+      "linha": 160,
       "areas": []
     },
     {
@@ -3095,7 +3195,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 156,
+      "linha": 161,
       "areas": []
     },
     {
@@ -3115,7 +3215,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 157,
+      "linha": 162,
       "areas": []
     },
     {
@@ -3135,7 +3235,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 158,
+      "linha": 163,
       "areas": []
     },
     {
@@ -3155,7 +3255,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 159,
+      "linha": 164,
       "areas": []
     },
     {
@@ -3175,7 +3275,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 160,
+      "linha": 165,
       "areas": []
     },
     {
@@ -3195,7 +3295,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 161,
+      "linha": 166,
       "areas": []
     },
     {
@@ -3215,7 +3315,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 162,
+      "linha": 167,
       "areas": []
     },
     {
@@ -3235,7 +3335,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 163,
+      "linha": 168,
       "areas": []
     },
     {
@@ -3255,7 +3355,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 164,
+      "linha": 169,
       "areas": []
     },
     {
@@ -3275,7 +3375,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 165,
+      "linha": 170,
       "areas": []
     },
     {
@@ -3295,7 +3395,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 166,
+      "linha": 171,
       "areas": []
     },
     {
@@ -3315,7 +3415,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 167,
+      "linha": 172,
       "areas": []
     },
     {
@@ -3335,7 +3435,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 168,
+      "linha": 173,
       "areas": []
     },
     {
@@ -3355,7 +3455,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 169,
+      "linha": 174,
       "areas": []
     },
     {
@@ -3375,7 +3475,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 170,
+      "linha": 175,
       "areas": []
     },
     {
@@ -3395,7 +3495,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 171,
+      "linha": 176,
       "areas": []
     },
     {
@@ -3415,7 +3515,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 172,
+      "linha": 177,
       "areas": []
     },
     {
@@ -3435,7 +3535,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 173,
+      "linha": 178,
       "areas": []
     },
     {
@@ -3455,7 +3555,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 174,
+      "linha": 179,
       "areas": []
     },
     {
@@ -3475,7 +3575,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 175,
+      "linha": 180,
       "areas": []
     },
     {
@@ -3495,7 +3595,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 176,
+      "linha": 181,
       "areas": []
     },
     {
@@ -3515,7 +3615,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 177,
+      "linha": 182,
       "areas": []
     },
     {
@@ -3535,7 +3635,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 178,
+      "linha": 183,
       "areas": []
     },
     {
@@ -3555,7 +3655,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 179,
+      "linha": 184,
       "areas": []
     },
     {
@@ -3575,7 +3675,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 180,
+      "linha": 185,
       "areas": []
     },
     {
@@ -3595,7 +3695,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 181,
+      "linha": 186,
       "areas": []
     },
     {
@@ -3615,7 +3715,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 182,
+      "linha": 187,
       "areas": []
     },
     {
@@ -3635,7 +3735,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 183,
+      "linha": 188,
       "areas": []
     },
     {
@@ -3655,7 +3755,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 184,
+      "linha": 189,
       "areas": []
     },
     {
@@ -3675,7 +3775,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 185,
+      "linha": 190,
       "areas": []
     },
     {
@@ -3695,7 +3795,7 @@
       "progresso": "",
       "impacto": "",
       "encaminhamentos": "",
-      "linha": 186,
+      "linha": 191,
       "areas": []
     }
   ]
